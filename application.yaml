@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/created-by: modeldynamics-helix
+    app.kubernetes.io/managed-by: modeldynamics
+    app.kubernetes.io/name: pach-spark
+    app.kubernetes.io/part-of: helix-project
+  name: pach-spark
+  namespace: argocd
+spec:
+  destination:
+    namespace: helix-pach-spark
+    server: https://kubernetes.default.svc
+  project: pach-spark
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: .
+    repoURL: git@github.com:lukemarsden/pach-spark.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 30s
+      limit: -1
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=background
+    - PruneLast=true
