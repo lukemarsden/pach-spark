@@ -20,7 +20,7 @@ spec:
       valueFiles:
       - values.yaml
     path: .
-    repoURL: git@github.com:lukemarsden/pach-spark.git
+    repoURL: git@github.com:lukemarsden/pach-spark
     targetRevision: HEAD
   syncPolicy:
     automated:
