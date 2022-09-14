@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/created-by: modeldynamics-helix
     app.kubernetes.io/managed-by: modeldynamics
-    app.kubernetes.io/name: pach-spark2
+    app.kubernetes.io/name: pchsprk
     app.kubernetes.io/part-of: helix-project
-  name: helix-pach-spark2
+  name: helix-pchsprk
   namespace: argocd

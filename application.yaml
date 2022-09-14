@@ -6,15 +6,15 @@ metadata:
   labels:
     app.kubernetes.io/created-by: modeldynamics-helix
     app.kubernetes.io/managed-by: modeldynamics
-    app.kubernetes.io/name: pach-spark2
+    app.kubernetes.io/name: pchsprk
     app.kubernetes.io/part-of: helix-project
-  name: pach-spark2
+  name: pchsprk
   namespace: argocd
 spec:
   destination:
-    namespace: helix-pach-spark2
+    namespace: helix-pchsprk
     server: https://kubernetes.default.svc
-  project: pach-spark2
+  project: pchsprk
   source:
     helm:
       valueFiles:

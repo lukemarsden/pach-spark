@@ -5,7 +5,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
   labels:
     app.kubernetes.io/managed-by: modeldynamics
-  name: pach-spark2
+  name: pchsprk
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -13,7 +13,7 @@ spec:
     kind: '*'
   description: This is a Model Dynamics Helix project.
   destinations:
-  - namespace: helix-pach-spark2
+  - namespace: helix-pchsprk
     server: https://kubernetes.default.svc
   - namespace: argocd
     server: https://kubernetes.default.svc
