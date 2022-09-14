@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/created-by: modeldynamics-helix
+    app.kubernetes.io/managed-by: modeldynamics
+    app.kubernetes.io/name: jupyter-lab
+    app.kubernetes.io/part-of: helix-application
+  name: pach-spark-jupyter-lab
+  namespace: argocd
+spec:
+  destination:
+    namespace: helix-pach-spark
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+      - name: envFrom[0].secretRef.name
+        value: aws-credentials
+      - name: mlflow.name
+        value: mlflow
+      - name: modeldynamics.internal.application.name
+        value: pach-spark-jupyter-lab
+      - name: modeldynamics.internal.project.name
+        value: pach-spark
+      valueFiles:
+      - values.yaml
+    path: charts/incubator/jupyter-lab
+    repoURL: https://github.com/combinator-ml/charts
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 30s
+      limit: -1
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=background
+    - PruneLast=true
